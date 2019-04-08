@@ -13,3 +13,5 @@ with jackhammer as source:
     audio2 = r.record(source, duration=4)
 
 print(r.recognize_google(audio1) + '  !=  ' + r.recognize_google(audio2))
+
+# Tutorial: https://realpython.com/python-speech-recognition/
