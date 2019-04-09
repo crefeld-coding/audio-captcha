@@ -13,6 +13,5 @@ r = sr.Recognizer()
 #     r.adjust_for_ambient_noise(source, duration=.5)
 #     audio2 = r.record(source, duration=4)
 
-print(r.recognize_google(audio1) + '  !=  ' + r.recognize_google(audio2))
 
 # Tutorial: https://realpython.com/python-speech-recognition/
