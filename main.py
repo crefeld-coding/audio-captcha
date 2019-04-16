@@ -1,5 +1,6 @@
 """Audio-Captcha Main"""
 
+import pocketsphinx
 import pyttsx3 as tts
 import random
 import speech_recognition as sr
@@ -8,22 +9,28 @@ import speech_recognition as sr
 r = sr.Recognizer()
 mic = sr.Microphone()
 engine = tts.init()
+
 PASSPHRASES = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
 
 
 def voice_input(passphrase):
 
+    global mic
+    global r
+    global engine
+
     engine.say("Please repeat the following pass phrase")
-    engine.say(passphrase)
+    engine.say(passphrase.join(" "))
     engine.runAndWait()
 
     with mic as source:
         try:
             audio = r.listen(source)
-            transcription = r.recognize_google(audio)
-            print(f"Input was: {transcription}")
             engine.say("Please wait")
             engine.runAndWait()
+            transcription = r.recognize_sphinx(audio, keyword_entries=[(word, .5) for word in passphrase])
+            print(f"Input was: {transcription}")
+
             return transcription
 
         except sr.UnknownValueError:
@@ -34,9 +41,9 @@ def voice_input(passphrase):
 def construct_passphrase():
     """Creates a passphrase of 3 words from the global tuple PASSPHRASES, returns a string"""
     global PASSPHRASES
-    passphrase = str()
+    passphrase = list()
     for i in range(3):
-        passphrase += (PASSPHRASES[random.randint(0, len(PASSPHRASES))] + " ")
+        passphrase.append(PASSPHRASES[random.randint(0, len(PASSPHRASES)-1)])
     return passphrase
 
 
