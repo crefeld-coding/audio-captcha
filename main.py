@@ -1,8 +1,8 @@
 """Audio-Captcha Main"""
 
-import speech_recognition as sr
 import pyttsx3 as tts
 import random
+import speech_recognition as sr
 
 # Global Vars
 r = sr.Recognizer()
