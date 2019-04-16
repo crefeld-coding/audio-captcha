@@ -2,3 +2,6 @@ SpeechRecognition
 pyaudio
 pyttsx3
 pyobjc
+pocketsphinx
+setuptools
+wheel
