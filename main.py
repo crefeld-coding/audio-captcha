@@ -10,7 +10,13 @@ r = sr.Recognizer()
 mic = sr.Microphone()
 engine = tts.init()
 
+DEBUGGING = True
 PASSWORDS = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
+
+
+def debug_print(text):
+    if DEBUGGING:
+        print(text)
 
 
 def voice_input(passphrase):
@@ -21,14 +27,22 @@ def voice_input(passphrase):
 
     engine.say("Please repeat the following pass phrase")
     engine.say(" ".join(passphrase))
+    debug_print("starting tts")
     engine.runAndWait()
+    debug_print("tts end")
 
     with mic as source:
         try:
+            debug_print("recording")
             audio = r.listen(source)
+            debug_print("recorded")
             engine.say("Please wait")
+            debug_print("starting tts")
             engine.runAndWait()
+            debug_print("tts end")
+            debug_print("starting transcription")
             transcription = r.recognize_google(audio)
+            debug_print("transcription end")
             print(f"Input was: {transcription}")
 
             return transcription.lower()
