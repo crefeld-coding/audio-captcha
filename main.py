@@ -28,7 +28,7 @@ def voice_input(passphrase):
             audio = r.listen(source)
             engine.say("Please wait")
             engine.runAndWait()
-            transcription = r.recognize_sphinx(audio, keyword_entries=[(word, .5) for word in passphrase])
+            transcription = r.recognize_google(audio)
             print(f"Input was: {transcription}")
 
             return transcription.lower()
