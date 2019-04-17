@@ -5,3 +5,4 @@ pyobjc
 pocketsphinx
 setuptools
 wheel
+gTTS
