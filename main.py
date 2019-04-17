@@ -20,7 +20,7 @@ def voice_input(passphrase):
     global engine
 
     engine.say("Please repeat the following pass phrase")
-    engine.say(passphrase.join(" "))
+    engine.say(" ".join(passphrase))
     engine.runAndWait()
 
     with mic as source:
@@ -31,7 +31,7 @@ def voice_input(passphrase):
             transcription = r.recognize_sphinx(audio, keyword_entries=[(word, .5) for word in passphrase])
             print(f"Input was: {transcription}")
 
-            return transcription
+            return transcription.lower()
 
         except sr.UnknownValueError:
             print("unrecognizable input")
@@ -48,9 +48,9 @@ def construct_passphrase():
 
 
 def verify_human():
-    passphrase = construct_passphrase().lower()
-    passphrase_entered = voice_input(passphrase).lower()
-    if passphrase_entered == passphrase:
+    passphrase = construct_passphrase()
+    passphrase_entered = voice_input(passphrase)
+    if passphrase_entered == " ".join(passphrase):
         print("Test Cleared")
     else:
         print("Test Failed")
