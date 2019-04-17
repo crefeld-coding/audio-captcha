@@ -10,7 +10,7 @@ r = sr.Recognizer()
 mic = sr.Microphone()
 engine = tts.init()
 
-PASSPHRASES = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
+PASSWORDS = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
 
 
 def voice_input(passphrase):
@@ -39,11 +39,11 @@ def voice_input(passphrase):
 
 
 def construct_passphrase():
-    """Creates a passphrase of 3 words from the global tuple PASSPHRASES, returns a string"""
-    global PASSPHRASES
+    """Creates a passphrase of 3 words from the global tuple PASSWORDS, returns a string"""
+    global PASSWORDS
     passphrase = list()
     for i in range(3):
-        passphrase.append(PASSPHRASES[random.randint(0, len(PASSPHRASES)-1)])
+        passphrase.append(PASSWORDS[random.randint(0, len(PASSWORDS) - 1)])
     return passphrase
 
 
