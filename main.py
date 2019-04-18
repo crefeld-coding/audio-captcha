@@ -3,6 +3,8 @@
 import gtts
 import pocketsphinx
 import pyttsx3 as tts
+from pydub import AudioSegment
+from pydub.playback import play
 import random
 import speech_recognition as sr
 

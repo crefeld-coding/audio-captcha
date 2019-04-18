@@ -6,3 +6,4 @@ pocketsphinx
 setuptools
 wheel
 gTTS
+pydub
