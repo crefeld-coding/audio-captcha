@@ -1,17 +1,18 @@
 """Audio-Captcha Main"""
 
 import gtts
+from io import BytesIO
 import pocketsphinx
-import pyttsx3 as tts
 from pydub import AudioSegment
 from pydub.playback import play
+import pyttsx3
 import random
 import speech_recognition as sr
 
 # Global Vars
 r = sr.Recognizer()
 mic = sr.Microphone()
-engine = tts.init()
+engine = pyttsx3.init()
 
 DEBUGGING = True
 PASSWORDS = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
@@ -22,27 +23,31 @@ def debug_print(text):
         print(text)
 
 
+def voice_output(string):
+    debug_print("starting tts")
+    mp3_fp = BytesIO()
+    tts = gtts.gTTS(string, 'en')
+    tts.write_to_fp(mp3_fp)
+    audio = AudioSegment.from_mp3(mp3_fp)
+    play(audio)
+    debug_print("tts end")
+
+
 def voice_input(passphrase):
 
     global mic
     global r
     global engine
 
-    engine.say("Please repeat the following pass phrase")
-    engine.say(" ".join(passphrase))
-    debug_print("starting tts")
-    engine.runAndWait()
-    debug_print("tts end")
+    voice_output("Please repeat the following pass phrase")
+    voice_output(" ".join(passphrase))
 
     with mic as source:
         try:
             debug_print("recording")
             audio = r.listen(source)
             debug_print("recorded")
-            engine.say("Please wait")
-            debug_print("starting tts")
-            engine.runAndWait()
-            debug_print("tts end")
+            voice_output("Please wait")
             debug_print("starting transcription")
             transcription = r.recognize_google(audio)
             debug_print("transcription end")
