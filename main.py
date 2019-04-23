@@ -21,13 +21,11 @@ def voice_input(passphrase):
         try:
             audio = r.listen(source)
             transcription = r.recognize_google(audio)
-            print(f"Input was: {transcription.lower()}")
             os.system("say please wait")
             return transcription.lower()
 
         except sr.UnknownValueError:
-            print("unrecognizable input")
-            return "unrecognizable input"
+            return 1
 
 
 def construct_passphrase():
@@ -37,7 +35,6 @@ def construct_passphrase():
     for i in range(3):
         passphrase.append(PASSPHRASES[random.randint(0, len(PASSPHRASES)-1)])
     passphrase = " ".join(passphrase)
-    print(f'Passphrase was:  {passphrase}')
     return passphrase.lower()
 
 
@@ -45,10 +42,22 @@ def verify_human():
     passphrase = construct_passphrase()
     passphrase_entered = voice_input(passphrase)
     if passphrase_entered == passphrase:
-        print("Test Cleared")
+        return 0
+    elif passphrase_entered == 1:
+        os.system("say Unrecognisable Input, please try again")
+        return 1
     else:
-        print("Test Failed")
+        os.system("say Test Failed, please try again")
+        return 2
 
 
 if __name__ == "__main__":
-    verify_human()
+    failed_tests = 0
+    while True:
+        last_test = verify_human()
+        if last_test == 0:
+            os.system("say Test Cleared")
+        else:
+            failed_tests += 1
+        if failed_tests >= 3:
+            os.system("say access denied")
