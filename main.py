@@ -3,6 +3,7 @@
 import speech_recognition as sr
 import pyttsx3 as tts
 import random
+import os
 
 # Global Vars
 r = sr.Recognizer()
@@ -13,18 +14,16 @@ PASSPHRASES = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtr
 
 def voice_input(passphrase):
 
-    engine.say("Please repeat the following pass phrase")
-    engine.say(passphrase)
-    engine.runAndWait()
+    os.system("say Please repeat the following pass phrase")
+    os.system(f"say {passphrase}")
 
     with mic as source:
         try:
             audio = r.listen(source)
             transcription = r.recognize_google(audio)
             print(f"Input was: {transcription}")
-            engine.say("Please wait")
-            engine.runAndWait()
             return transcription
+            os.system("say please wait")
 
         except sr.UnknownValueError:
             print("unrecognizable input")
