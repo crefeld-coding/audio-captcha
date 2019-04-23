@@ -36,7 +36,7 @@ def construct_passphrase():
     global PASSPHRASES
     passphrase = str()
     for i in range(3):
-        passphrase += (PASSPHRASES[random.randint(0, len(PASSPHRASES))] + " ")
+        passphrase += (PASSPHRASES[random.randint(0, len(PASSPHRASES)-1)] + " ")
     return passphrase
 
 
