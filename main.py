@@ -14,7 +14,7 @@ PASSPHRASES = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtr
 
 def voice_input(passphrase):
 
-    os.system("say Please repeat the following pass phrase")
+    os.system("say please repeat the following pass phrase")
     os.system(f"say {passphrase}")
 
     with mic as source:
@@ -44,10 +44,10 @@ def verify_human():
     if passphrase_entered == passphrase:
         return 0
     elif passphrase_entered == 1:
-        os.system("say Unrecognisable Input, please try again")
+        os.system("say unrecognisable input, please try again")
         return 1
     else:
-        os.system("say Test Failed, please try again")
+        os.system("say test failed, please try again")
         return 2
 
 
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     while True:
         last_test = verify_human()
         if last_test == 0:
-            os.system("say Test Cleared")
+            os.system("say test cleared")
         else:
             failed_tests += 1
         if failed_tests >= 3:
