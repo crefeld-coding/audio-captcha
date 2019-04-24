@@ -1,14 +1,12 @@
 """Audio-Captcha Main"""
 
 import speech_recognition as sr
-import pyttsx3 as tts
 import random
 import os
 
 # Global Vars
 r = sr.Recognizer()
 mic = sr.Microphone()
-engine = tts.init()
 PASSPHRASES = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
 
 
