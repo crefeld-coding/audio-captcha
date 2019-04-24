@@ -52,14 +52,25 @@ def verify_human():
 
 if __name__ == "__main__":
     failed_tests = 0
+    bad_inputs = 0
     while True:
         last_test = verify_human()
+
+        # tests and keeps track of what verify_human() returned, returns success if test passed
         if last_test == 0:
             os.system("say test cleared")
-            sys.exit(ExitStatus.success)
+            sys.exit(ExitStatus.success)  # exit code for success
+        elif last_test == 1:
+            failed_tests += 1
+            bad_inputs += 1
         else:
             failed_tests += 1
-        if failed_tests >= 3:
+
+        # tests if threshold is passed for failed tests, returns relevant exit codes
+        if bad_inputs >= 3:
             os.system("say access denied")
-            sys.exit(ExitStatus.EACCESS)
+            sys.exit(ExitStatus.EIO)  # exit code for input/output error
+        elif failed_tests >= 3:
+            os.system("say access denied")
+            sys.exit(ExitStatus.EACCESS)  # exit code for access denied
         os.system("say please try again")
