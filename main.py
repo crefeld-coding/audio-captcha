@@ -10,7 +10,7 @@ mic = sr.Microphone()
 PASSPHRASES = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
 
 
-def voice_input(passphrase):
+def get_user_attempt(passphrase):
 
     os.system("say please repeat the following pass phrase")
     os.system(f"say {passphrase}")
@@ -38,7 +38,7 @@ def construct_passphrase():
 
 def verify_human():
     passphrase = construct_passphrase()
-    passphrase_entered = voice_input(passphrase)
+    passphrase_entered = get_user_attempt(passphrase)
     if passphrase_entered == passphrase:
         return 0
     elif passphrase_entered == 1:
