@@ -43,7 +43,7 @@ def verify_human():
     if passphrase_entered == passphrase:
         return 0
     elif passphrase_entered == 1:
-        os.system("say unrecognisable input, please try again")
+        os.system("say unrecognisable input")
         return 1
     else:
         os.system("say test failed")
