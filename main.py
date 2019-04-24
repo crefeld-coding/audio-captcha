@@ -1,8 +1,10 @@
 """Audio-Captcha Main"""
 
+from exitstatus import ExitStatus
 import speech_recognition as sr
 import random
 import os
+import sys
 
 # Global Vars
 r = sr.Recognizer()
@@ -54,10 +56,10 @@ if __name__ == "__main__":
         last_test = verify_human()
         if last_test == 0:
             os.system("say test cleared")
-            break
+            sys.exit(ExitStatus.success)
         else:
             failed_tests += 1
         if failed_tests >= 3:
             os.system("say access denied")
-            break
+            sys.exit(ExitStatus.EACCESS)
         os.system("say please try again")
