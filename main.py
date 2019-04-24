@@ -19,7 +19,6 @@ def get_user_attempt(passphrase):
         try:
             audio = r.listen(source)
             transcription = r.recognize_google(audio)
-            os.system("say please wait")
             return transcription.lower()
 
         except sr.UnknownValueError:
