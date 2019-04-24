@@ -47,7 +47,7 @@ def verify_human():
         os.system("say unrecognisable input, please try again")
         return 1
     else:
-        os.system("say test failed, please try again")
+        os.system("say test failed")
         return 2
 
 
@@ -57,7 +57,10 @@ if __name__ == "__main__":
         last_test = verify_human()
         if last_test == 0:
             os.system("say test cleared")
+            break
         else:
             failed_tests += 1
         if failed_tests >= 3:
             os.system("say access denied")
+            break
+        os.system("say please try again")
