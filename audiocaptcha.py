@@ -8,11 +8,10 @@ import sys
 
 # Global Vars
 r = sr.Recognizer()
-mic = sr.Microphone()
 PASSPHRASES = ("swordfish", "alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
 
 
-def get_user_attempt(passphrase):
+def get_user_attempt(passphrase, mic):
 
     os.system("say please repeat the following pass phrase")
     os.system(f"say {passphrase}")
@@ -37,9 +36,9 @@ def construct_passphrase():
     return passphrase.lower()
 
 
-def run_test():
+def run_test(mic):
     passphrase = construct_passphrase()
-    passphrase_entered = get_user_attempt(passphrase)
+    passphrase_entered = get_user_attempt(passphrase, mic)
     if passphrase_entered == passphrase:
         return 0
     elif passphrase_entered == 1:
@@ -50,11 +49,11 @@ def run_test():
         return 2
 
 
-def verify_human():
+def verify_human(mic=sr.Microphone):
     failed_tests = 0
     bad_inputs = 0
     while True:
-        last_test = run_test()
+        last_test = run_test(mic)
 
         # tests and keeps track of what verify_human() returned, returns success if test passed
         if last_test == 0:
