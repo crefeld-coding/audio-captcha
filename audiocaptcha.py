@@ -49,7 +49,7 @@ def run_test(mic):
         return 2
 
 
-def verify_human(mic=sr.Microphone):
+def verify_human(mic=sr.Microphone()):
     failed_tests = 0
     bad_inputs = 0
     while True:
