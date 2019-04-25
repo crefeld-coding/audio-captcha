@@ -37,7 +37,7 @@ def construct_passphrase():
     return passphrase.lower()
 
 
-def verify_human():
+def run_test():
     passphrase = construct_passphrase()
     passphrase_entered = get_user_attempt(passphrase)
     if passphrase_entered == passphrase:
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     failed_tests = 0
     bad_inputs = 0
     while True:
-        last_test = verify_human()
+        last_test = run_test()
 
         # tests and keeps track of what verify_human() returned, returns success if test passed
         if last_test == 0:
