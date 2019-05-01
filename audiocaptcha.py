@@ -1,6 +1,5 @@
 """Audio-Captcha Main"""
 
-from exitstatus import ExitStatus
 import speech_recognition as sr
 import random
 import os
@@ -58,7 +57,7 @@ def verify_human(mic=sr.Microphone()):
         # tests and keeps track of what verify_human() returned, returns success if test passed
         if last_test == 0:
             os.system("say test cleared")
-            return ExitStatus.success  # exit code for success
+            return os.EX_OK  # exit code for success
         elif last_test == 1:
             failed_tests += 1
             bad_inputs += 1
@@ -68,10 +67,10 @@ def verify_human(mic=sr.Microphone()):
         # tests if threshold is passed for failed tests, returns relevant exit codes
         if bad_inputs >= 3:
             os.system("say access denied")
-            return ExitStatus.EIO  # exit code for input/output error
+            return os.EX_NOINPUT  # exit code for input error
         elif failed_tests >= 3:
             os.system("say access denied")
-            return ExitStatus.EACCESS  # exit code for access denied
+            return os.EX_NOPERM  # exit code for insufficient permissions
         os.system("say please try again")
 
 
