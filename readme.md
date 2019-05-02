@@ -19,7 +19,7 @@
     * `import audio-captcha`
 * To run the program:
     * `verify_human()`
-* You can also run the audiocaptcha file, which will run the same as running the method
+* You can also run the audiocaptcha.py file, which will return the same as running the method
 
 
 ### Returns:
