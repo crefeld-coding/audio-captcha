@@ -1,4 +1,4 @@
-## Audio Captcha Documentation
+## audio-captcha Documentation
 
 ### Installation:
 
@@ -19,12 +19,12 @@
     * `import audio-captcha`
 * To run the program:
     * `verify_human()`
-* You can also run the file, which will run the same as running the method
+* You can also run the audiocaptcha file, which will run the same as running the method
 
 
 ### Returns:
 
-* audiocaptcha will return one of 3 exit codes:
+* audiocaptcha and verify_human will return one of 3 exit codes:
     * 0 (successful exit)
     * 77 (access denied)
     * 66 (unrecognisable input)
